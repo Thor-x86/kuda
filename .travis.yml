@@ -8,3 +8,7 @@ go:
 script:
   - go get github.com/valyala/fasthttp
   - make test
+
+branches:
+  only:
+    - master
