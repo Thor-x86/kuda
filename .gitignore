@@ -1,0 +1,25 @@
+# Generated file at WSL
+*:Zone.Identifier
+**/*:Zone.Identifier
+
+# Generated file at Mac
+.DS_STORE
+**/.DS_STORE
+
+# Generated file at Windows XP
+Thumbs.db
+**/Thumbs.db
+
+# Compiled
+build/
+kuda
+kuda.exe
+
+# Front-end modules and compiled directory
+**/node_modules/
+**/dist/
+**/build/
+
+# Logs
+*.log
+**/*.log

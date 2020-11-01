@@ -1,0 +1,19 @@
+# Unecessary directories inside docker container
+demo/
+test/
+
+# Unecessary files inside docker container
+README.md
+load_test.go
+Makefile
+test-cert.pem
+test-key.key
+
+# Compiled files
+build/
+kuda
+
+# Hidden files
+.editorconfig
+.gitignore
+.git
