@@ -19,24 +19,40 @@ func load(publicDir string) {
 
 	// Load files one by one
 	fmt.Printf("Loading from \"%s\":\n", publicDir)
-	filepath.Walk(publicDir, func(path string, info os.FileInfo, err2 error) error {
+	filepath.Walk(publicDir, func(path string, info os.FileInfo, err1 error) error {
 		// Check for premature error
+		if err1 != nil {
+			log.Fatalln(err1.Error())
+			return err1
+		}
+
+		// We just need files, so skip to directory's content
+		if info.IsDir() {
+			return nil
+		}
+
+		// Get absolute path of public directory
+		absolutePublicDir, err2 := filepath.Abs(publicDir)
 		if err2 != nil {
 			log.Fatalln(err2.Error())
 			return err2
 		}
 
-		// We just need files, so skip to its inside
-		if info.IsDir() {
-			return nil
-		}
-
-		// Convert absolute path to URI without leading slash
-		uriPath := strings.TrimPrefix(path, publicDir+"/")
-		fileData, err3 := ioutil.ReadFile(path)
+		// Get absolute path of file path
+		absolutePath, err3 := filepath.Abs(path)
 		if err3 != nil {
 			log.Fatalln(err3.Error())
 			return err3
+		}
+
+		// Get URI path from absolute path
+		uriPath := strings.TrimPrefix(absolutePath, absolutePublicDir)
+		uriPath = strings.ReplaceAll(uriPath, "\\", "/")
+		uriPath = strings.TrimPrefix(uriPath, "/")
+		fileData, err4 := ioutil.ReadFile(path)
+		if err4 != nil {
+			log.Fatalln(err4.Error())
+			return err4
 		}
 
 		isCompressed := false
@@ -71,15 +87,15 @@ func load(publicDir string) {
 
 		// Do GZIP compression
 		var compressedData bytes.Buffer
-		compressor, err4 := gzip.NewWriterLevel(&compressedData, gzip.BestCompression)
-		if err4 != nil {
-			log.Fatalln(err4.Error())
-			return err4
-		}
-		_, err5 := compressor.Write(fileData)
+		compressor, err5 := gzip.NewWriterLevel(&compressedData, gzip.BestCompression)
 		if err5 != nil {
 			log.Fatalln(err5.Error())
 			return err5
+		}
+		_, err6 := compressor.Write(fileData)
+		if err6 != nil {
+			log.Fatalln(err6.Error())
+			return err6
 		}
 		compressor.Close()
 
