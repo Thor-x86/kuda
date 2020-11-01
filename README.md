@@ -12,6 +12,10 @@ The best use case is serving Single Page Application (SPA) like [React](https://
 
 Special thanks to [fasthttp](https://github.com/valyala/fasthttp) and contributors for making kuda possible 🤘
 
+## Download
+
+See [release timeline](https://github.com/Thor-x86/kuda/releases)
+
 ## How to use
 
 ```
