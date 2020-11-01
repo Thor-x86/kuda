@@ -5,4 +5,6 @@ go:
   - 1.5.x
   - master
 
-script: make test
+script:
+  - go get github.com/valyala/fasthttp
+  - make test
