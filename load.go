@@ -17,25 +17,25 @@ func load(publicDir string) {
 	// Add temporary map of file
 	loaded := map[string]fileModel{}
 
+	// Get absolute path of public directory
+	absolutePublicDir, err1 := filepath.Abs(publicDir)
+	if err1 != nil {
+		log.Fatalln(err1.Error())
+		return
+	}
+
 	// Load files one by one
 	fmt.Printf("Loading from \"%s\":\n", publicDir)
-	filepath.Walk(publicDir, func(path string, info os.FileInfo, err1 error) error {
+	filepath.Walk(publicDir, func(path string, info os.FileInfo, err2 error) error {
 		// Check for premature error
-		if err1 != nil {
-			log.Fatalln(err1.Error())
-			return err1
+		if err2 != nil {
+			log.Fatalln(err2.Error())
+			return err2
 		}
 
 		// We just need files, so skip to directory's content
 		if info.IsDir() {
 			return nil
-		}
-
-		// Get absolute path of public directory
-		absolutePublicDir, err2 := filepath.Abs(publicDir)
-		if err2 != nil {
-			log.Fatalln(err2.Error())
-			return err2
 		}
 
 		// Get absolute path of file path
