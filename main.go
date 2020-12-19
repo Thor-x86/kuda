@@ -70,6 +70,15 @@ func main() {
 
 	fmt.Printf("Kuda is listening at %s port...\n", port)
 
+	// Configure server connection and only allow GET method
+	server := fasthttp.Server{
+		Handler:                       handler,
+		ErrorHandler:                  errorHandler,
+		GetOnly:                       true,
+		DisablePreParseMultipartForm:  true,
+		DisableHeaderNamesNormalizing: true,
+	}
+
 	// Remember, emptied port-tls means disabled TLS
 	var err error = nil
 	if len(portTLS) > 0 {
@@ -86,10 +95,10 @@ func main() {
 		})
 
 		// Listen for incoming HTTPS request:
-		err = fasthttp.ListenAndServeTLS(":"+portTLS, certFile, keyFile, handler)
+		err = server.ListenAndServeTLS(":"+portTLS, certFile, keyFile)
 	} else {
 		// Listen for incoming HTTP request:
-		err = fasthttp.ListenAndServe(":"+port, handler)
+		err = server.ListenAndServe(":" + port)
 	}
 
 	log.Fatalln(err)
