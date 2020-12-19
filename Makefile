@@ -1,4 +1,4 @@
-all: clean win_x64 win_x32 linux_x64 linux_x32 linux_arm64 linux_arm32 mac
+all: clean win_x64 win_x32 linux_x64 linux_x32 linux_arm64 linux_arm32 mac_intel mac_arm
 
 .PHONY: test demo
 
@@ -34,5 +34,8 @@ linux_arm64:
 linux_arm32:
 	GOOS=linux GOARCH=arm go build -o build/kuda-linux_arm32
 
-mac:
-	GOOS=darwin GOARCH=amd64 go build -o build/kuda-mac
+mac_intel:
+	GOOS=darwin GOARCH=amd64 go build -o build/kuda-mac_intel
+
+mac_arm:
+	GOOS=darwin GOARCH=amd64 go build -o build/kuda-mac_arm
