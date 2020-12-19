@@ -16,7 +16,7 @@ func handler(ctx *fasthttp.RequestCtx) {
 	}
 
 	// For CORS acknowledge
-	if string(ctx.Method()) == "OPTIONS" {
+	if ctx.IsOptions() {
 		ctx.SetStatusCode(204)
 		return
 	}
