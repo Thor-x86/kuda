@@ -71,7 +71,7 @@ func handler(ctx *fasthttp.RequestCtx) {
 	ctx.Response.Header.Set("Server", "kuda")
 	ctx.Response.Header.Set("Access-Control-Allow-Origin", origins)
 	ctx.Response.Header.Set("Access-Control-Allow-Methods", "GET, OPTIONS")
-	ctx.Response.Header.Set("Access-Control-Allow-Headers", "Content-Type")
+	ctx.Response.Header.Set("Access-Control-Allow-Headers", "Host,Accept,Accept-Encoding,Connection,User-Agent")
 
 	// Get elapsed request-response time and client IPv4
 	elapsed := time.Now().Sub(requestTime)
