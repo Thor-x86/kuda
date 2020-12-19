@@ -5,7 +5,6 @@
 [![Open Pull Request](https://img.shields.io/github/issues-pr-raw/Thor-x86/kuda)](https://github.com/Thor-x86/kuda/pulls)
 [![Unit Test Result](https://img.shields.io/travis/Thor-x86/kuda)](https://travis-ci.org/Thor-x86/kuda)
 
-
 Fast and concurrent in-memory web server. It compress static files with [gzip](https://en.wikipedia.org/wiki/Gzip), put them into RAM, and serve them as a normal web server. So Dev/Ops don't have to worry about storage speed, just focus on networking matter.
 
 The best use case is serving Single Page Application (SPA) like [React](https://reactjs.org/), [Vue](https://vuejs.org/), and [Angular](https://angular.io/).
@@ -55,13 +54,12 @@ Now we have same directory as above with `cert.pem` and `secret.key` inside of i
 
 The `localhost:8000` is considered using HTTP protocol. So every connection coming to that port will be redirected to `https://localhost:8090`.
 
-
 ### Serving Production App
 
-In production environment, assuming you have `www.my-domain.com`, it will be like:
+In production environment, assuming you have `www.my-domain.com` web URL and `api.my-domain.com` for API URL:
 
 ```
-sudo ./kuda my-app/build --port=80 --origins=localhost:9000 --port-tls=443 --domain=www.my-domain.com --cert=/etc/ssl/certs/my-domain.pem --key=/etc/ssl/private/my-domain.key
+sudo ./kuda my-app/build --port=80 --origins=api.my-domain.com --port-tls=443 --domain=www.my-domain.com --cert=/etc/ssl/certs/my-domain.pem --key=/etc/ssl/private/my-domain.key
 ```
 
 ## With Docker
@@ -83,20 +81,20 @@ I would recommend you to use Docker Compose instead of plain Docker for sake of 
 version: "3"
 
 services:
-    kuda:
-        image: kuda:latest
-        volumes:
-            - ./my-compiled-webapp:/srv
-        environment:
-            KUDA_PUBLIC_DIR: "/srv"
-            KUDA_DOMAIN: "localhost"
-            KUDA_PORT: "8080"
-            KUDA_ORIGINS: ""
-            KUDA_PORT_TLS: ""
-            KUDA_CERT: ""
-            KUDA_KEY: ""
-        ports:
-            - 8080:8080
+  kuda:
+    image: kuda:latest
+    volumes:
+      - ./my-compiled-webapp:/srv
+    environment:
+      KUDA_PUBLIC_DIR: "/srv"
+      KUDA_DOMAIN: "localhost"
+      KUDA_PORT: "8080"
+      KUDA_ORIGINS: ""
+      KUDA_PORT_TLS: ""
+      KUDA_CERT: ""
+      KUDA_KEY: ""
+    ports:
+      - 8080:8080
 ```
 
 ## Benchmark
@@ -106,6 +104,7 @@ I have no enough resource to benchmark Kuda Web Server myself. If you did benchm
 ## Contribution
 
 Anyone can contribute on this project. We welcome you to Pull Request or Open an Issue. To working on source code, you will require:
+
 - Linux or Mac preferred (Use [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10) if you are Windows 10 user or [Cygwin](https://www.cygwin.com/) for older Windows)
 - Golang
 - Makefile
@@ -115,10 +114,11 @@ Anyone can contribute on this project. We welcome you to Pull Request or Open an
 ### Makefile Commands
 
 There are things you can do with makefile on this project:
-- `make`       -- Compile for all platforms and store them inside "build" directory
-- `make test`  -- Run this everytime you want to pull request
+
+- `make` -- Compile for all platforms and store them inside "build" directory
+- `make test` -- Run this everytime you want to pull request
 - `make clean` -- Removes all compiled files to reduce storage usage
-- `make demo`  -- Run demonstration, go to `http://localhost:8080` on browser while running this command
+- `make demo` -- Run demonstration, go to `http://localhost:8080` on browser while running this command
 
 ### Security Report
 
