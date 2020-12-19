@@ -13,52 +13,52 @@ func TestLoad(t *testing.T) {
 	load(publicPath)
 
 	expectations := map[string]fileModel{
-		"index.html": fileModel{
+		"index.html": {
 			data:         loadFileFromDisk(t, "index.html", true),
 			mime:         "text/html",
 			isCompressed: true,
 		},
-		"index.css": fileModel{
+		"index.css": {
 			data:         loadFileFromDisk(t, "index.css", true),
 			mime:         "text/css",
 			isCompressed: true,
 		},
-		"index.js": fileModel{
+		"index.js": {
 			data:         loadFileFromDisk(t, "index.js", true),
 			mime:         "application/javascript",
 			isCompressed: true,
 		},
-		"roboto.ttf": fileModel{
+		"roboto.ttf": {
 			data:         loadFileFromDisk(t, "roboto.ttf", true),
 			mime:         "font/ttf",
 			isCompressed: true,
 		},
-		"test.jpg": fileModel{
+		"test.jpg": {
 			data:         loadFileFromDisk(t, "test.jpg", false),
 			mime:         "image/jpeg",
 			isCompressed: false,
 		},
-		"test.png": fileModel{
+		"test.png": {
 			data:         loadFileFromDisk(t, "test.png", false),
 			mime:         "image/png",
 			isCompressed: false,
 		},
-		"test.svg": fileModel{
+		"test.svg": {
 			data:         loadFileFromDisk(t, "test.svg", true),
 			mime:         "image/svg+xml",
 			isCompressed: true,
 		},
-		"with_index/index.html": fileModel{
+		"with_index/index.html": {
 			data:         loadFileFromDisk(t, "with_index/index.html", true),
 			mime:         "text/html",
 			isCompressed: true,
 		},
-		"with_index/wkwkwk@&$!-_#=+.jpg": fileModel{
+		"with_index/wkwkwk@&$!-_#=+.jpg": {
 			data:         loadFileFromDisk(t, "with_index/wkwkwk@&$!-_#=+.jpg", false),
 			mime:         "image/jpeg",
 			isCompressed: false,
 		},
-		"without-index/never gonna give you up.jpg": fileModel{
+		"without-index/never gonna give you up.jpg": {
 			data:         loadFileFromDisk(t, "without-index/never gonna give you up.jpg", false),
 			mime:         "image/jpeg",
 			isCompressed: false,
